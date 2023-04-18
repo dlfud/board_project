@@ -30,18 +30,18 @@ let list = [
 ];
 
 router.get("/", (req, res) => {
-  res.render("index.html");
+  res.render("index.ejs");
 });
 
 router.get("/board/list", (req, res) => {
-  res.render("board_list.html", {
+  res.render("board_list.ejs", {
     content: list,
     //list, 라고 써도됨
   });
 });
 
 router.get("/board/write", (req, res) => {
-  res.render("board_create.html");
+  res.render("board_create.ejs");
 });
 
 router.post("/board/write", (req, res) => {
@@ -53,7 +53,7 @@ router.post("/board/write", (req, res) => {
 });
 
 router.get("/board/view", (req, res) => {
-  res.render("board_view.html");
+  res.render("board_view.ejs");
 });
 
 module.exports = router;
