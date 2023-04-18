@@ -35,7 +35,7 @@ router.get("/", (req, res) => {
 
 router.get("/board/list", (req, res) => {
   res.render("board_list.ejs", {
-    content: list,
+    data: list,
     //list, 라고 써도됨
   });
 });
@@ -46,7 +46,7 @@ router.get("/board/write", (req, res) => {
 
 router.post("/board/write", (req, res) => {
   let board = { ...req.body };
-  console.log(list, board);
+  console.log(board);
   list.push(board);
   console.log(list);
   res.redirect("/board/list");
