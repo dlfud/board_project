@@ -9,13 +9,24 @@
 <body>
     <h1><a href="/">LOGO</a></h1>
     <h2>게시판 리스트</h2>
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
         <% for(var i = 0; i < data.length; i++) { %>
-            <p>
-                <h5><%= data[i].subject %> <%= data[i].username %> <%= data[i].date %></h5>
-            </p>
+        <tr>
+            <td><%= i + 1 %></td>
+            <td><a href="/board/view/<%= i %>"><%= data[i].subject %></a></td>
+            <td><%= data[i].username %></td>
+            <td><%= data[i].date %></td>
+        </tr>
         <% } %>
 
 
         <a href="/board/write">글쓰기</a>
+    </table>
 </body>
 </html>

@@ -9,15 +9,27 @@
 <body>
     <h1><a href="/">LOGO</a></h1>
     <h2>게시판 글쓰기</h2>
-    <form method="post" action="/board/write">
-        <h3> 제목 : </h3>
-        <input type="text" name="subject">
-        <h3> 작성자 : </h3>
-        <input type="text" name="username">
-        <h3> 작성일 : </h3>    
-        <input type="text" name="date">
-        <input type="submit" value="작성하기">
-    </form>
+    <% if (data != null) { %>
+        <form method="post" action="/board/update/<%= id %>">
+            <h3> 제목 : </h3>
+            <input type = "text" name="subject" value="<%= data.subject %>">
+            <h3> 작성자 : </h3>
+            <input type="text" name="username" value="<%= data.username %>">
+            <h3> 작성일 : </h3>    
+            <input type="text" name="date" value="<%= data.date %>">
+            <input type="submit" value="수정하기">
+        </form>  
+    <% } else { %>
+        <form method="post" action="/board/write">
+            <h3> 제목 : </h3>
+            <input type="text" name="subject">
+            <h3> 작성자 : </h3>
+            <input type="text" name="username">
+            <h3> 작성일 : </h3>    
+            <input type="text" name="date">
+            <input type="submit" value="작성하기">
+        </form>
+    <% } %>
     <a href="/board/list">취소</a>
 
 </body>

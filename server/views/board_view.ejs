@@ -1,16 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <body>
     <h1><a href="/">LOGO</a></h1>
     <h2>게시판 보기</h2>
     <ul>
         <li>
-            제목 : 질문 있습니다.
+            제목 : <%= data.subject %>
         </li>
         <li>
-            작성자 : podo
+            작성자 : <%= data.username %>
         </li>
         <li>
-            작성일 : 2022-02-03
+            작성일 : <%= data.date %>
         </li>
     </ul>
+    <a href="/board/update/<%= id %>">수정</a>
     <a href="/board/list">목록</a>
 </body>
+</html>
