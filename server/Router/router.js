@@ -52,7 +52,10 @@ router.get("/board/write", (req, res) => {
 router.post("/board/write", (req, res) => {
   let board = { ...req.body };
   list.push(board);
-  res.redirect("/board/list");
+  // res.redirect("/board/list");
+  res.json({
+    msg: "success",
+  });
 });
 
 //상세보기
@@ -79,9 +82,12 @@ router.post("/board/update/:id", (req, res) => {
   list[id].subject = board.subject;
   list[id].username = board.username;
   list[id].date = board.date;
-  res.render("board_list.ejs", {
-    data: list,
+  res.json({
+    msg: "success",
   });
+  // res.render("board_list.ejs", {
+  //   data: list,
+  // });
 });
 
 module.exports = router;

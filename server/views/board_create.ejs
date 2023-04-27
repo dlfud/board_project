@@ -9,28 +9,75 @@
 <body>
     <h1><a href="/">LOGO</a></h1>
     <h2>게시판 글쓰기</h2>
-    <% if (data != null) { %>
-        <form method="post" action="/board/update/<%= id %>">
-            <h3> 제목 : </h3>
-            <input type = "text" name="subject" value="<%= data.subject %>">
-            <h3> 작성자 : </h3>
-            <input type="text" name="username" value="<%= data.username %>">
-            <h3> 작성일 : </h3>    
-            <input type="text" name="date" value="<%= data.date %>">
-            <input type="submit" value="수정하기">
-        </form>  
-    <% } else { %>
-        <form method="post" action="/board/write">
-            <h3> 제목 : </h3>
-            <input type="text" name="subject">
-            <h3> 작성자 : </h3>
-            <input type="text" name="username">
-            <h3> 작성일 : </h3>    
-            <input type="text" name="date">
-            <input type="submit" value="작성하기">
-        </form>
+    <% if (data != null) { %>        
+        <input type="hidden" id="hiddenId" value="<%= id %>"/>
+        <h3> 제목 : </h3>
+        <input type = "text" id="updateSubject" name="subject" value="<%= data.subject %>">
+        <h3> 작성자 : </h3>
+        <input type="text" id="updateUsername" name="username" value="<%= data.username %>">
+        <h3> 작성일 : </h3>    
+        <input type="text" id="updateDate" name="date" value="<%= data.date %>">
+        <input type="button" id="update" value="수정하기">
+    <% } else { %>        
+        <h3> 제목 : </h3>
+        <input type="text" id="createSubject" name="subject">
+        <h3> 작성자 : </h3>
+        <input type="text" id="createUsername" name="username">
+        <h3> 작성일 : </h3>    
+        <input type="text" id="createDate" name="date">
+        <input type="button" id="create" value="작성하기">
     <% } %>
-    <a href="/board/list">취소</a>
+    <input type="button" id="cancle" value="취소"/>
 
 </body>
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script>
+    //취소 버튼
+    $("#cancle").click(function(){
+        location.href = "/board/list";
+    })
+
+    // 작성하기 버턴
+    $("#create").click(function(){
+        let subject = $("#createSubject").val();
+        let username = $("#createUsername").val();
+        let date = $("#createDate").val();
+
+        $.ajax({
+            type:"POST",
+            dataType:"JSON",
+            url:"/board/write",
+            data: {subject, username, date}
+        }).done(function(data){
+            if(data.msg == "success"){
+                location.href = "/board/list";
+            }else{
+                console.log(data.msg)
+            }
+        })
+    })
+console.log($("#hiddenId").val())
+    //수정하기 버튼
+    $("#update").click(function(){
+        let subject = $("#updateSubject").val();
+        let username = $("#updateUsername").val();
+        let date = $("#updateDate").val();
+        let id = $("#hiddenId").val();
+
+        $.ajax({
+            type:"POST",
+            dataType:"JSON",
+            url:"/board/update/" + id,
+            data:{
+                subject, username, date
+            }
+        }).done(function(data){
+            if(data.msg == "success"){
+                location.href = "/board/view/" + id;
+            }else{
+                console.log(data.msg)
+            }
+        })
+    })
+</script>
 </html>

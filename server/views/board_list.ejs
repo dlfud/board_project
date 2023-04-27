@@ -25,8 +25,14 @@
         </tr>
         <% } %>
 
-
-        <a href="/board/write">글쓰기</a>
+        <input type="button" id="write" value="글쓰기"/>
     </table>
+    
 </body>
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script>
+    $("#write").click(function(){
+        location.href = "/board/write";
+    })
+</script>
 </html>

@@ -20,7 +20,19 @@
             작성일 : <%= data.date %>
         </li>
     </ul>
-    <a href="/board/update/<%= id %>">수정</a>
-    <a href="/board/list">목록</a>
+    <input type="hidden" id="hiddenId" value="<%= id %>"/>
+    <input type="button" id="updateBtn" value="수정"/>
+    <input type="button" id="boardList" value="목록"/>
 </body>
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script>
+    $("#updateBtn").click(function(){
+        let id = $("#hiddenId").val();
+        location.href = "/board/update/" + id;
+    })
+
+    $("#boardList").click(function(){
+        location.href = "/board/list";
+    })
+</script>
 </html>
