@@ -14,13 +14,16 @@
             제목 : <%= data.subject %>
         </li>
         <li>
-            작성자 : <%= data.username %>
+            작성자 : <%= data.userName %>
         </li>
         <li>
-            작성일 : <%= data.date %>
+            내용 : <%= data.content %>
+        </li>
+        <li>
+            작성일 : <%= data.createDate %>
         </li>
     </ul>
-    <input type="hidden" id="hiddenId" value="<%= id %>"/>
+    <input type="hidden" id="hiddenId" value="<%= data.id %>"/>
     <input type="button" id="updateBtn" value="수정"/>
     <input type="button" id="boardList" value="목록"/>
 </body>

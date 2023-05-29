@@ -10,21 +10,21 @@
     <h1><a href="/">LOGO</a></h1>
     <h2>게시판 글쓰기</h2>
     <% if (data != null) { %>        
-        <input type="hidden" id="hiddenId" value="<%= id %>"/>
+        <input type="hidden" id="hiddenId" value="<%= data.id %>"/>
         <h3> 제목 : </h3>
         <input type = "text" id="updateSubject" name="subject" value="<%= data.subject %>">
         <h3> 작성자 : </h3>
-        <input type="text" id="updateUsername" name="username" value="<%= data.username %>">
-        <h3> 작성일 : </h3>    
-        <input type="text" id="updateDate" name="date" value="<%= data.date %>">
+        <input type="text" id="updateUserName" name="userName" value="<%= data.userName %>">
+        <h3> 내용 : </h3>
+        <input type="text" id="updateContent" name="content" value="<%= data.content %>">
         <input type="button" id="update" value="수정하기">
     <% } else { %>        
         <h3> 제목 : </h3>
         <input type="text" id="createSubject" name="subject">
         <h3> 작성자 : </h3>
-        <input type="text" id="createUsername" name="username">
-        <h3> 작성일 : </h3>    
-        <input type="text" id="createDate" name="date">
+        <input type="text" id="createUserName" name="userName">
+        <h3> 내용 : </h3>
+        <input type="text" id="createContent" name="content">
         <input type="button" id="create" value="작성하기">
     <% } %>
     <input type="button" id="cancle" value="취소"/>
@@ -40,14 +40,14 @@
     // 작성하기 버턴
     $("#create").click(function(){
         let subject = $("#createSubject").val();
-        let username = $("#createUsername").val();
-        let date = $("#createDate").val();
+        let userName = $("#createUserName").val();
+        let content = $("#createContent").val();
 
         $.ajax({
             type:"POST",
             dataType:"JSON",
             url:"/board/write",
-            data: {subject, username, date}
+            data: {subject, userName, content}
         }).done(function(data){
             if(data.msg == "success"){
                 location.href = "/board/list";
@@ -56,12 +56,11 @@
             }
         })
     })
-console.log($("#hiddenId").val())
     //수정하기 버튼
     $("#update").click(function(){
         let subject = $("#updateSubject").val();
-        let username = $("#updateUsername").val();
-        let date = $("#updateDate").val();
+        let userName = $("#updateUserName").val();
+        let content = $("#updateContent").val();
         let id = $("#hiddenId").val();
 
         $.ajax({
@@ -69,11 +68,11 @@ console.log($("#hiddenId").val())
             dataType:"JSON",
             url:"/board/update/" + id,
             data:{
-                subject, username, date
+                subject, userName, content
             }
         }).done(function(data){
             if(data.msg == "success"){
-                location.href = "/board/view/" + id;
+                location.href = "/board/detail/" + id;
             }else{
                 console.log(data.msg)
             }
